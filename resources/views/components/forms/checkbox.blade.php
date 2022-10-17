@@ -8,9 +8,9 @@
 
 @foreach($checklist as $key => $value)
     <div class="mb-3 form-check">
-        <input 
-            name="{{ $name }}" 
-            type="checkbox" 
+        <input
+            name="{{ $name }}"
+            type="checkbox"
             id="{{$key}}Input"
             value="{{ $key }}"
             @if(in_array($key, $checkedItems))

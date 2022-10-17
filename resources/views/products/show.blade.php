@@ -20,11 +20,19 @@
 
     <h2>Product Name: {{ $product->title }}</h2>
     <h4>Price: {{ $product->price }}</h4>
-    <h4>Category: {{ $product->category_id }}</h4>
-    <!-- <h4>Color: {{ $product->colors->color }}</h4> -->
+    <h4>Category: {{ $product->category->name }}</h4>
+    <h4>Color:</h4>
+    @foreach ($product->colors as $color)
+        <div> {{ $color->color }}</div>
+    @endforeach
+    <h4>Size:</h4>
+    @foreach ($product->sizes as $size)
+        <div> {{ $size->size }}</div>
+    @endforeach
+
     <h4>Brand: {{ $product->brand->brand }}</h4>
     <p>Description: {!! $product->description !!}</p>
     <p>Is Active?: {{ $product->is_active ? 'Yes' : 'No' }} </p>
-    <img src="{{ asset('storage/products/'.$product->image) }}" height="250" />
+    <img src="{{ asset('storage/products/' . $product->image) }}" height="250" />
 
 </x-master>

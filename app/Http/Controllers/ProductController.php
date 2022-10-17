@@ -37,7 +37,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'title' => $request->title,
             'price' => $request->price,
-            
+
             'brand_id' => $request->brand_id,
             'description' => $request->description,
             'is_active' => $request->is_active ? true : false,
@@ -58,9 +58,9 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('name', 'id')->toArray();
         $colors = Color::pluck('color', 'id')->toArray();
-        $selectedColors = $product->colors()->pluck('id')->toArray(); 
+        $selectedColors = $product->colors()->pluck('id')->toArray();
         $sizes = Size::pluck('size', 'id')->toArray();
-        $selectedSize = $product->sizes()->pluck('id')->toArray(); 
+        $selectedSize = $product->sizes()->pluck('id')->toArray();
         $brands = Brand::pluck('brand', 'id')->toArray();
         return view('products.edit', compact('product', 'categories','colors','sizes','selectedColors','brands','selectedSize'));
     }
@@ -71,11 +71,11 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'title' => $request->title,
             'price' => $request->price,
-            
+
             'brand_id' => $request->brand_id,
             'description' => $request->description,
             'is_active' => $request->is_active ? true : false,
-         
+
         ];
 
         if($request->hasFile('image')){
@@ -93,7 +93,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-       
+    //    dd($product->colors);
         return view('products.show', compact('product',));
     }
 
@@ -119,7 +119,7 @@ class ProductController extends Controller
         return redirect()
             ->route('products.trash')
             ->withMessage('Restored Successfully!');
-    } 
+    }
 
     public function delete($id)
     {
@@ -129,7 +129,7 @@ class ProductController extends Controller
         return redirect()
             ->route('products.trash')
             ->withMessage('Deleted Successfully!');
-    } 
+    }
 
     public function downloadPdf()
     {
@@ -140,11 +140,11 @@ class ProductController extends Controller
 
     public function uploadImage($file){
         $fileName = date('y-m-d').'-'.time().'.'.$file ->getClientOriginalExtension();
-        // $file->move(storage_path('app/public/products'), $fileName);
+        $file->move(storage_path('app/public/products'), $fileName);
 
-        Image::make($file)
-                ->resize(200, 200)
-                ->save(storage_path() . '/app/public/products/' . $fileName);
+        // Image::make($file)
+        //         ->resize(200, 200)
+        //         ->save(storage_path() . '/app/public/products/' . $fileName);
 
         return $fileName;
     }
