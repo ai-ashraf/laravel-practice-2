@@ -48,6 +48,12 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('sizes.index') }}">
+                    <span data-feather="bar-chart-2"></span>
+                    Size
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="bar-chart-2"></span>
                     Reports

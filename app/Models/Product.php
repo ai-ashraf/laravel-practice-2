@@ -17,9 +17,13 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    public function color()
+    public function colors()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsToMany(Color::class);
+    }
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
     }
     public function brand()
     {

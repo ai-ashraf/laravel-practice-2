@@ -9,10 +9,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Color extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['color'];
-
-    public function product()
-    {
-        return $this->hasMany(Product::class);
-    }
+    protected $fillable = ['color','color_code'];
 }

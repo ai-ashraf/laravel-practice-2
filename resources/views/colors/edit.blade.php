@@ -25,7 +25,7 @@
         @method('patch')
 
         <x-forms.input type="text" name="color" label="Color" :value="old('color', $color->color)" required placeholder="Enter name" />
-
+        <x-forms.input type="color" name="color_code" label="Color Code" :value="old('color_code', $color->color_code)" required />
 
 
 

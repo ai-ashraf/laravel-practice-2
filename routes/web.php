@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,11 @@ Route::middleware('auth')->group(function(){
     Route::patch('color-trash/{id}', [ColorController::class, 'restore'])->name('colors.restore');
     Route::delete('color-trash/{id}', [ColorController::class, 'delete'])->name('colors.delete');
     // Route::get('categories/pdf', [CategoryController::class, 'downloadPdf'])->name('categories.pdf');
+
+    Route::resource('sizes', SizeController::class);
+    Route::get('size-trash', [SizeController::class, 'trash'])->name('sizes.trash');
+    Route::patch('size-trash/{id}', [SizeController::class, 'restore'])->name('sizes.restore');
+    Route::delete('size-trash/{id}', [SizeController::class, 'delete'])->name('sizes.delete');
 
     Route::resource('brands', BrandController::class);
     Route::get('brand-trash', [BrandController::class, 'trash'])->name('brands.trash');

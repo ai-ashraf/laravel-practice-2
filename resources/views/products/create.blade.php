@@ -28,14 +28,18 @@
 
         <x-forms.input type="text" name="title" label="Title" :value="old('title')" required placeholder="Enter name" />
         <x-forms.input type="number" name="price" label="price" :value="old('price')" required placeholder="Enter Price" />
-        <x-forms.select name="color_id" label="Color" :options="$colors" :selected="old('color_id')" required/>
+        
         <x-forms.select name="brand_id" label="Brand" :options="$brands" :selected="old('brand_id')" required/>
 
         <x-forms.input type="file" name="image" label="Image"/>
         <x-forms.textarea name="description" label="Description" :value="old('description')"/>
 
-        {{-- select, checkbox, radio, texarea --}}
+        <x-forms.checkbox name="colors[]" :checklist="$colors" label="Colors"/>
+        <x-forms.checkbox name="size[]" :checklist="$sizes" label="Size"/>
 
+        <div class="mb-3">
+            <label class="form-check-label">Status</label>
+        </div>
         <div class="mb-3 form-check">
             <input name="is_active" type="checkbox" class="form-check-input" id="isActiveInput">
             <label class="form-check-label" for="isActiveInput">Is Active ?</label>

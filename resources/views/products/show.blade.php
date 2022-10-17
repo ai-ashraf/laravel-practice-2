@@ -21,7 +21,7 @@
     <h2>Product Name: {{ $product->title }}</h2>
     <h4>Price: {{ $product->price }}</h4>
     <h4>Category: {{ $product->category_id }}</h4>
-    <h4>Color: {{ $product->color->color }}</h4>
+    <!-- <h4>Color: {{ $product->colors->color }}</h4> -->
     <h4>Brand: {{ $product->brand->brand }}</h4>
     <p>Description: {!! $product->description !!}</p>
     <p>Is Active?: {{ $product->is_active ? 'Yes' : 'No' }} </p>

@@ -22,10 +22,11 @@ class ColorController extends Controller
     public function store(ColorRequest $request)
     {
 
-        // dd($request->name);
+        // dd($request->all());
 
         $data = [
             'color' => $request->color,
+            'color_code' => $request->color_code
         ];
 
         Color::create($data);
@@ -44,12 +45,8 @@ class ColorController extends Controller
     {
         $data = [
             'color' => $request->color,
-            // 'is_active' => $request->is_active ? true : false,
+            'color_code' => $request->color_code
         ];
-
-        // if($request->hasFile('image')){
-        //     $data['image'] = $this->uploadImage($request->file('image'));
-        // }
 
         $Color->update($data);
 

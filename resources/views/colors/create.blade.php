@@ -24,7 +24,7 @@
         @csrf
 
         <x-forms.input type="text" name="color" label="color" :value="old('color')" required placeholder="Enter Color name" />
-
+        <x-forms.input type="color" name="color_code" label="Color Code" :value="old('color_code')" required />
 
 
 

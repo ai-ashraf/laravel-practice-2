@@ -30,8 +30,8 @@
             <thead>
                 <tr>
                     <th>SL#</th>
-                    <th>name</th>
-
+                    <th>Color</th>
+                    <th>Color Code</th>
                     <th width="180">Action</th>
                 </tr>
             </thead>
@@ -40,6 +40,9 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $color->color }}</td>
+                    <td>
+                        <div style="background-color: {{$color->color_code}}">{{ $color->color_code }}</div>
+                    </td>
 
                     <td class="d-flex">
                         <a class="btn btn-sm btn-outline-info" href="{{ route('colors.show', $color->id) }}">Show</a>

@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Image;
@@ -23,9 +24,10 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('name', 'id')->toArray();
         $colors = Color::pluck('color', 'id')->toArray();
+        $sizes = Size::pluck('size', 'id')->toArray();
         $brands = Brand::pluck('brand', 'id')->toArray();
 
-        return view('products.create', compact('categories','colors','brands'));
+        return view('products.create', compact('categories','colors','sizes','brands'));
     }
 
     public function store(ProductRequest $request)
@@ -35,7 +37,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'title' => $request->title,
             'price' => $request->price,
-            'color_id' => $request->color_id,
+            
             'brand_id' => $request->brand_id,
             'description' => $request->description,
             'is_active' => $request->is_active ? true : false,
@@ -43,7 +45,9 @@ class ProductController extends Controller
         ];
         // dd($data);
 
-        Product::create($data);
+        $product = Product::create($data);
+        $product->colors()->attach($request->colors);
+        $product->sizes()->attach($request->size);
 
         return redirect()
             ->route('products.index')
@@ -54,8 +58,11 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('name', 'id')->toArray();
         $colors = Color::pluck('color', 'id')->toArray();
+        $selectedColors = $product->colors()->pluck('id')->toArray(); 
+        $sizes = Size::pluck('size', 'id')->toArray();
+        $selectedSize = $product->sizes()->pluck('id')->toArray(); 
         $brands = Brand::pluck('brand', 'id')->toArray();
-        return view('products.edit', compact('product', 'categories','colors','brands'));
+        return view('products.edit', compact('product', 'categories','colors','sizes','selectedColors','brands','selectedSize'));
     }
 
     public function update(ProductRequest $request,Product $product)
@@ -64,7 +71,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'title' => $request->title,
             'price' => $request->price,
-            'color_id' => $request->color_id,
+            
             'brand_id' => $request->brand_id,
             'description' => $request->description,
             'is_active' => $request->is_active ? true : false,
@@ -76,6 +83,8 @@ class ProductController extends Controller
         }
 
         $product->update($data);
+        $product->colors()->sync($request->colors);
+        $product->sizes()->sync($request->size);
 
         return redirect()
             ->route('products.index')
@@ -84,7 +93,8 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+       
+        return view('products.show', compact('product',));
     }
 
     public function destroy(Product $product)

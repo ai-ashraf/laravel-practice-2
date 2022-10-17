@@ -22,7 +22,9 @@
     <!-- <h1>Price: {{ $color->price }}</h1>
     <p>Description: {!! $color->description !!}</p>
     <p>Is Active?: {{ $color->is_active ? 'Yes' : 'No' }} </p> -->
-    <img src="{{ asset('storage/colors/'.$color->image) }}" height="250" />
+    <td>
+        <div style="background-color: {{$color->color_code}}">{{ $color->color_code }}</div>
+    </td>
 
 
 </x-master>
